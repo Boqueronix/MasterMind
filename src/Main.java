@@ -9,6 +9,7 @@ public class Main {
     public static boolean mousePressed = false;
     public static boolean gameEnd = false;
     public static void main(String[] args) {
+        StdDraw.setCanvasSize(650,650);
         for (int i = 0; i < 6; i++) {
             answer.add(new Circle(colors[(int) (Math.random() * 9)]));
         }
@@ -65,6 +66,7 @@ public class Main {
                     for (int j = 0; j < 6; j++) {
                         if (!answer.get(j).counted && answer.get(j).color == attempts.get(onIndex).get(i).color && attempts.get(onIndex).get(i).background == null){
                             attempts.get(onIndex).get(i).background = new Color(252, 245, 152);
+                            answer.get(j).counted = true;
                         }
                     }
                 }
@@ -92,6 +94,7 @@ public class Main {
                     gameEnd = true;
                     Board.init();
                     System.out.println("YOU WIN");
+                    System.out.println(attempts.size());
                     return;
                 }
                 attempts.add(new ArrayList<>());
