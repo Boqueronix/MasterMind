@@ -27,17 +27,37 @@ public class Board {
         StdDraw.setPenColor(Color.BLACK);
         StdDraw.text(0.15, 0.1, "DEL");
         StdDraw.text(0.85, 0.1, "CLR");
-        //attempts
+        //attempts No more than 5/ 6 pls
         int num = Main.attempts.size();
-        System.out.println(num);
-        for (int i = 0; i < num; i++) {
-            for (int j = 0; j < 6; j++) {
-                if (j < Main.attempts.get(i).size()){
-                    StdDraw.setPenColor(Main.attempts.get(i).get(j));
-                } else {
-                    StdDraw.setPenColor(Color.GRAY);
+        if (num < 7) {
+            for (int i = 0; i < num; i++) {
+                for (int j = 0; j < 6; j++) {
+                    if (j < Main.attempts.get(i).size()) {
+                        if (Main.attempts.get(i).get(j).submitted && Main.attempts.get(i).get(j).background != null) {
+                            StdDraw.setPenColor(Main.attempts.get(i).get(j).background);
+                            StdDraw.filledCircle((j + 1) / 7.0, 0.25 + (i + 1) * 0.75 / (num + 1), 0.055);
+                        }
+                        StdDraw.setPenColor(Main.attempts.get(i).get(j).color);
+                    } else {
+                        StdDraw.setPenColor(Color.GRAY);
+                    }
+                    StdDraw.filledCircle((j + 1) / 7.0, 0.25 + (i + 1) * 0.75 / (num + 1), 0.045);
                 }
-                StdDraw.filledCircle((j + 1) / 7.0, 0.25 + (i + 1) * 0.75 / (num + 1), 0.04);
+            }
+        } else {
+            for (int i = 0; i < 6; i++) {
+                for (int j = 0; j < 6; j++) {
+                    if (j < Main.attempts.get(num - 6 + i).size()) {
+                        if (Main.attempts.get(num - 6 + i).get(j).submitted && Main.attempts.get(num - 6 + i).get(j).background != null) {
+                            StdDraw.setPenColor(Main.attempts.get(num - 6 + i).get(j).background);
+                            StdDraw.filledCircle((j + 1) / 7.0, 0.25 + (i + 1) * 0.75 / (6 + 1), 0.055);
+                        }
+                        StdDraw.setPenColor(Main.attempts.get(num - 6 + i).get(j).color);
+                    } else {
+                        StdDraw.setPenColor(Color.GRAY);
+                    }
+                    StdDraw.filledCircle((j + 1) / 7.0, 0.25 + (i + 1) * 0.75 / (6 + 1), 0.045);
+                }
             }
         }
     }
